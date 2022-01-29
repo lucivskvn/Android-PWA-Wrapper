@@ -1,5 +1,6 @@
 package at.xtools.pwawrapper.webview;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,21 +27,22 @@ import at.xtools.pwawrapper.ui.UIManager;
 
 public class WebViewHelper {
     // Instance variables
-    private Activity activity;
-    private UIManager uiManager;
-    private WebView webView;
-    private WebSettings webSettings;
+    private final Activity activity;
+    private final UIManager uiManager;
+    private final WebView webView;
+    private final WebSettings webSettings;
 
     public WebViewHelper(Activity activity, UIManager uiManager) {
         this.activity = activity;
         this.uiManager = uiManager;
-        this.webView = (WebView) activity.findViewById(R.id.webView);
+        this.webView = activity.findViewById(R.id.webView);
         this.webSettings = webView.getSettings();
     }
 
     /**
      * Simple helper method checking if connected to Network.
      * Doesn't check for actual Internet connection!
+     *
      * @return {boolean} True if connected to Network.
      */
     private boolean isNetworkAvailable() {
@@ -48,11 +50,8 @@ public class WebViewHelper {
                 (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = manager.getActiveNetworkInfo();
 
-        boolean isAvailable = false;
-        if (networkInfo != null && networkInfo.isConnected()) {
-            // Wifi or Mobile Network is present and connected
-            isAvailable = true;
-        }
+        boolean isAvailable = networkInfo != null && networkInfo.isConnected();
+        // Wifi or Mobile Network is present and connected
         return isAvailable;
     }
 
@@ -73,6 +72,7 @@ public class WebViewHelper {
     }
 
     // handles initial setup of webview
+    @SuppressLint("SetJavaScriptEnabled")
     public void setupWebView() {
         // accept cookies
         CookieManager.getInstance().setAcceptCookie(true);
@@ -182,27 +182,23 @@ public class WebViewHelper {
     // show "no app found" dialog
     private void showNoAppDialog(Activity thisActivity) {
         new AlertDialog.Builder(thisActivity)
-            .setTitle(R.string.noapp_heading)
-            .setMessage(R.string.noapp_description)
-            .show();
+                .setTitle(R.string.noapp_heading)
+                .setMessage(R.string.noapp_description)
+                .show();
     }
+
     // handle load errors
     private void handleLoadError(int errorCode) {
         if (errorCode != WebViewClient.ERROR_UNSUPPORTED_SCHEME) {
             uiManager.setOffline(true);
         } else {
             // Unsupported Scheme, recover
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    goBack();
-                }
-            }, 100);
+            new Handler().postDelayed(() -> goBack(), 100);
         }
     }
 
     // handle external urls
-    private boolean handleUrlLoad(WebView view, String url) {
+    private void handleUrlLoad(WebView view, String url) {
         // prevent loading content that isn't ours
         if (!url.startsWith(Constants.WEBAPP_URL)) {
             // stop loading
@@ -222,13 +218,11 @@ public class WebViewHelper {
                 showNoAppDialog(activity);
             }
             // return value for shouldOverrideUrlLoading
-            return true;
         } else {
             // let WebView load the page!
             // activate loading animation screen
             uiManager.setLoading(true);
             // return value for shouldOverrideUrlLoading
-            return false;
         }
     }
 

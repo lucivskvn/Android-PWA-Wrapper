@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Android-PWA-Wrapper.iml" filepath="$PROJECT_DIR$/Android-PWA-Wrapper.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Android-PWA-Wrapper-Migrated.iml" filepath="$PROJECT_DIR$/.idea/modules/Android-PWA-Wrapper-Migrated.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Android-PWA-Wrapper-Migrated.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Android-PWA-Wrapper-Migrated.app.iml" />
     </modules>
   </component>
 </project>
