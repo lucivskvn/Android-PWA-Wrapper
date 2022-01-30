@@ -23,8 +23,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:tint="@color/colorPrimary"
-            app:srcCompat="@drawable/ic_cloud_off_black_48dp" />
+            android:contentDescription="@string/app_name"
+            app:srcCompat="@drawable/ic_cloud_off_black_48dp"
+            app:tint="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/offlineHeading"
@@ -53,19 +54,19 @@
         android:indeterminateTint="@color/colorPrimary" />
 
     <WebView
+        android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/webView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
 
     <ProgressBar
         android:id="@+id/progressBarBottom"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:max="100"
         android:progress="0"
         android:progressTint="@color/green" />
