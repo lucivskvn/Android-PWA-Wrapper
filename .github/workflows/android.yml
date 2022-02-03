@@ -22,7 +22,7 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
     - name: Accepting the Build Tools licence
       run: yes | ~/Android/Sdk/tools/bin/sdkmanager –licenses
+    - name: Build with Gradle
+      run: ./gradlew build
