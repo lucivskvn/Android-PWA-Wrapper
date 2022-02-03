@@ -1,4 +1,4 @@
-# Android-PWA-Wrapper ( Fork )
+# Android-PWA-Wrapper ( Forked )
 
 An Android Wrapper application to create native Android Apps from an offline-capable Progressive Web App.
 
