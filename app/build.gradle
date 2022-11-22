@@ -22,6 +22,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
     }
     buildToolsVersion '32.1.0-rc1'
+    namespace 'at.xtools.pwawrapper'
 }
 
 dependencies {
