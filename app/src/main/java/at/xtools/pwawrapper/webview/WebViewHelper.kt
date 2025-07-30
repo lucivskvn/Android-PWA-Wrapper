@@ -13,7 +13,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.Message
 import android.webkit.*
-import at.xtools.pwawrapper.Constants
+import at.xtools.pwawrapper.BuildConfig
 import at.xtools.pwawrapper.R
 import at.xtools.pwawrapper.ui.UIManager
 
@@ -73,7 +73,7 @@ class WebViewHelper(// Instance variables
         webSettings.databaseEnabled = true
 
         // enable mixed content mode conditionally
-        if (Constants.ENABLE_MIXED_CONTENT) {
+        if (BuildConfig.ENABLE_MIXED_CONTENT) {
             webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE
         }
 
@@ -81,13 +81,13 @@ class WebViewHelper(// Instance variables
         forceCacheIfOffline()
 
         // set User Agent
-        if (Constants.OVERRIDE_USER_AGENT || Constants.POSTFIX_USER_AGENT) {
+        if (BuildConfig.OVERRIDE_USER_AGENT || BuildConfig.POSTFIX_USER_AGENT) {
             var userAgent = webSettings.userAgentString
-            if (Constants.OVERRIDE_USER_AGENT) {
-                userAgent = Constants.USER_AGENT
+            if (BuildConfig.OVERRIDE_USER_AGENT) {
+                userAgent = BuildConfig.USER_AGENT
             }
-            if (Constants.POSTFIX_USER_AGENT) {
-                userAgent = userAgent + " " + Constants.USER_AGENT_POSTFIX
+            if (BuildConfig.POSTFIX_USER_AGENT) {
+                userAgent = userAgent + " " + BuildConfig.USER_AGENT_POSTFIX
             }
             webSettings.userAgentString = userAgent
         }
@@ -173,7 +173,7 @@ class WebViewHelper(// Instance variables
     // handle external urls
     private fun handleUrlLoad(view: WebView, url: String) {
         // prevent loading content that isn't ours
-        if (!url.startsWith(Constants.WEBAPP_URL)) {
+        if (!url.startsWith(BuildConfig.WEBAPP_URL)) {
             // stop loading
             // stopping only would cause the PWA to freeze, need to reload the app as a workaround
             view.stopLoading()
@@ -210,12 +210,12 @@ class WebViewHelper(// Instance variables
 
     // load app startpage
     fun loadHome() {
-        webView.loadUrl(Constants.WEBAPP_URL)
+        webView.loadUrl(BuildConfig.WEBAPP_URL)
     }
 
     // load URL from intent
     fun loadIntentUrl(url: String) {
-        if (url != "" && url.contains(Constants.WEBAPP_HOST)) {
+        if (url != "" && url.contains(BuildConfig.WEBAPP_HOST)) {
             webView.loadUrl(url)
         } else {
             // Fallback

@@ -2,14 +2,27 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 34
     defaultConfig {
         applicationId "at.xtools.pwawrapper"
         minSdk 28
-        targetSdkVersion 32
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+
+        buildConfigField "String", "WEBAPP_URL", '"https://nuxt-proto-tailwind.vercel.app/"'
+        buildConfigField "String", "WEBAPP_HOST", '"nuxt-proto-tailwind.vercel.app"'
+        buildConfigField "boolean", "POSTFIX_USER_AGENT", "true"
+        buildConfigField "boolean", "OVERRIDE_USER_AGENT", "false"
+        buildConfigField "String", "USER_AGENT_POSTFIX", '"AndroidApp"'
+        buildConfigField "String", "USER_AGENT", '"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Mobile Safari/537.36"'
+        buildConfigField "int", "SLIDE_EFFECT", "500"
+        buildConfigField "int", "PROGRESS_THRESHOLD", "65"
+        buildConfigField "boolean", "ENABLE_MIXED_CONTENT", "false"
+    }
+    buildFeatures {
+        buildConfig true
     }
     buildTypes {
         release {
@@ -21,18 +34,17 @@ android {
         targetCompatibility "1.8"
         sourceCompatibility JavaVersion.VERSION_1_8
     }
-    buildToolsVersion '32.1.0-rc1'
     namespace 'at.xtools.pwawrapper'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation('androidx.test.espresso:espresso-core:3.4.0', {
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.5.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     testImplementation 'junit:junit:4.13.2'
-    implementation "androidx.core:core-ktx:1.7.0"
+    implementation "androidx.core:core-ktx:1.10.1"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {
